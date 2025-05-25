@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static model.Employees.getEmployees;
+
 /**
  * Get Average and Total Salary of Employees in an Organization
  * Get Employee names whose age are below 22 and whose age are above 22
@@ -24,9 +26,5 @@ public class AverageAndTotalSalaryOfOrganization {
         System.out.println(partitionedMap.get(true).stream().map(Employees::getName).collect(Collectors.toList()));
     }
 
-    public static List<Employees> getEmployees(){
-        return List.of(new Employees(1,20000.00,"EmpOne",21),
-                new Employees(2, 30000.00,"EmpTwo", 22),
-                new Employees(3, 40000.00, "EmpThree", 23));
-    }
+
 }
