@@ -1,4 +1,6 @@
-package data.arrayquestions;
+package data.arrayquestions.twoPointer;
+
+import java.util.Arrays;
 
 /*
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
@@ -25,8 +27,21 @@ Output: [0,1]
  */
 public class TwoSum {
     public static void main(String[] args) {
-        int[] nums = {2,7,11,15};
-        int target = 9;
+        int[] nums = {3,1};
+        int target = 6;
+        System.out.println(Arrays.toString(findSubArraySum(nums, target)));
+    }
 
+    private static int[] findSubArraySum(int[] nums, int target) {
+        int i = 0;
+        int[] ans = new int[2];
+        while(i < nums.length-1){
+            if(nums[i] + nums[i+1] == target){
+                ans[0] = i;
+                ans[1] = i+1;
+            }
+            i++;
+        }
+        return ans;
     }
 }

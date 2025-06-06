@@ -2,6 +2,9 @@ package data.sort;
 
 import java.util.Arrays;
 
+/**
+ * Similar code for union of two arrays
+ */
 public class MergeSort {
 
     public static void main(String[] args) {
@@ -25,7 +28,7 @@ public class MergeSort {
         int s2 = right - mid;
 
         int[] lArr = new int[s1];
-        int[] rArr = new int[s1];
+        int[] rArr = new int[s2];
 
         for(int i=0; i< s1; i++){
             lArr[i] = nums[left+i];

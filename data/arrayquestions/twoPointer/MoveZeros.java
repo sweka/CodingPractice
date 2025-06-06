@@ -1,4 +1,4 @@
-package data.arrayquestions;
+package data.arrayquestions.twoPointer;
 
 import java.util.Arrays;
 

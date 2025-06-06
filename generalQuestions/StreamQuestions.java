@@ -2,15 +2,12 @@ package generalQuestions;
 
 import model.Employees;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class YellowCoder {
+public class StreamQuestions {
 
     public static void main(String[] args) {
         no_of_MaleAndFemaleEmployees_Organization();
@@ -31,6 +28,43 @@ public class YellowCoder {
         findTwoHighestSalariedEmployees();
         sortMapByKey();
         reverseArrayWithoutUsingThirdVariable();
+        findThirdMaximumElement();
+        reverseString();
+        secondLargestElement();
+    }
+
+    private static void secondLargestElement() {
+        int[] lst = new int[]{12,13,16,55,44,12,16,55,44,13};
+        Arrays.stream(lst).boxed().distinct().sorted(Comparator.reverseOrder()).limit(2).skip(1).forEach(System.out::print);
+    }
+
+    private static void reverseString() {
+        String s = "I LOVE INDIA";
+        String snew = "";
+        String[] sArr = s.split(" ");
+        for(int i = sArr.length-1; i>=0; i--){
+            snew+= " "+sArr[i];
+        }
+        System.out.println(snew.trim());
+        var  reversed= Arrays.stream(sArr).collect(Collectors.collectingAndThen(Collectors.toList(),
+                i -> {
+                Collections.reverse(i);
+                return i.stream();
+                })).collect(Collectors.joining(" "));
+        System.out.println(reversed);
+
+    }
+
+    private static void findThirdMaximumElement() {
+        int position = 5;
+        int[] nums = {3,1,4,5};
+        Integer max = Arrays.stream(nums).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                i -> {
+                    return i.size() < position ? i.get(0) : i.get(position-1);
+                }
+        ));
+        System.out.println(max);
     }
 
 
@@ -53,7 +87,7 @@ public class YellowCoder {
 
     private static void sortMapByKey() {
         var map = Map.of("Python", 95,"JavaScript", 89,"C++", 92,"TypeScript", 85,"Swift", 80);
-        map.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).forEach(k -> System.out.print(k.getKey() + ": "+ k.getValue()));
+        map.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(k -> System.out.print(k.getKey() + ": "+ k.getValue()));
         System.out.println();
         System.out.println("-----------------------------------------------------------------");
     }
@@ -72,8 +106,8 @@ public class YellowCoder {
     }
 
     private static void listOfStringToMapKeyStringValueLength() {
-        List<String> strings = Arrays.asList("apple", "banana", "orange", "grape", "kiwi");
-        System.out.print("String to Map: "+strings.stream().collect(Collectors.toMap(Function.identity(), String::length)));
+        List<String> strings = Arrays.asList("apple", "apple", "banana", "orange", "grape", "kiwi");
+        System.out.print("String to Map: "+strings.stream().collect(Collectors.toMap(Function.identity(), String::length, (v1,v2) -> v1, LinkedHashMap::new)));
         System.out.println();
         System.out.println("-----------------------------------------------------------------");
     }
@@ -94,7 +128,7 @@ public class YellowCoder {
 
     private static void groupListOfStringByLength() {
         List<String> strings = Arrays.asList("apple", "banana", "cherry", "date", "fig", "grape", "kiwi", "melon", "pear", "plum");
-        System.out.print("Group List of String by Length: " + strings.stream().collect(Collectors.groupingBy(i -> i.length())));
+        System.out.print("Group List of String by Length: " + strings.stream().collect(Collectors.groupingBy(String::length)));
         System.out.println();
         System.out.println("-----------------------------------------------------------------");
     }

@@ -1,4 +1,6 @@
-package data.arrayquestions;
+package data.arrayquestions.twoPointer;
+
+import java.util.Arrays;
 
 /*
 Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
@@ -46,8 +48,21 @@ public class RemoveElement {
     public static void main(String[] args) {
         int[] nums = {0,1,2,2,3,0,4,2};
         int val = 2;
-        int j = 0;
+        int uniqueVal  = removeElement(nums, val);
+        System.out.println(Arrays.toString(nums)+ ": "+uniqueVal);
 
+    }
 
+    private static int removeElement(int[] nums, int val) {
+        int i = 0;
+        int j = 0; //{0,1,2,2,3,0,4,2};
+        while(i < nums.length){
+            if(nums[i]!= val){
+                nums[j] = nums[i];
+                j++;
+            }
+            i++;
+        }
+        return j;
     }
 }

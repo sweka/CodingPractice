@@ -1,4 +1,4 @@
-package data.arrayquestions;
+package data.arrayquestions.rotateArray;
 
 import java.util.Arrays;
 
